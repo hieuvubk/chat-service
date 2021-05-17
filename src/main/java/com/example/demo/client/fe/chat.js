@@ -1,11 +1,11 @@
-const url = 'http://localhost:8080';
+const url = 'http://localhost:8081';
 let stompClient;
 let selectedUser;
 let currentUser;
 let newMessages = new Map();
 
 
-function connect(userName) {
+function connect(event) {
     // const Stomp = require("stompjs");
     // var SockJS = require("sockjs-client");
     // SockJS = new SockJS("/ws");
@@ -33,7 +33,7 @@ function onMessageReceived(data) {
     }
 }
 
-function sendMessage(msg) {
+function sendMsg(msg) {
     if(msg.trim() !== "") {
         const message = {
             senderId: currentUser.id,
@@ -105,7 +105,7 @@ function fetchAll() {
 function registration() {
     let userName = document.getElementById("userName").value;
     $.get(url + "/registration/" + userName, function (response) {
-        connectToChat(userName);
+        connect();
     }).fail(function (error) {
         if (error.status === 400) {
             alert("Login is already busy!")

@@ -4,18 +4,30 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Table;
 import org.springframework.data.annotation.Id;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(appliesTo = "room")
+@Entity
+@Table(name="room")
 public class ChatRoom {
     @Id
     private String id;
     private String chatId;
     private String senderId;
     private String recipientId;
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @javax.persistence.Id
+    public String getId() {
+        return id;
+    }
 }

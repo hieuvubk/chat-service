@@ -6,8 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Table;
+import org.springframework.data.annotation.Id;
 
 
+import javax.persistence.Entity;
 import java.awt.*;
 import java.lang.annotation.Documented;
 import java.util.Date;
@@ -16,9 +18,10 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(appliesTo = "message")
+@Entity
+@javax.persistence.Table(name="message")
 public class ChatMessage {
-//    @Id
+    @Id
     private String id;
     private String chatId;
     private String senderId;
@@ -28,4 +31,13 @@ public class ChatMessage {
     private String content;
     private Date timestamp;
     private MessageStatus status;
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @javax.persistence.Id
+    public String getId() {
+        return id;
+    }
 }
